@@ -14,7 +14,12 @@ ip=sys.argv[1]
 
 def nmap(ip):
     os.system("mkdir nmap")
-    os.system(f"nmap -p- -Pn -vvv --script default,vuln -sV -oA nmap/tcp {ip}")
+    print("Running NMAP stealth scan")
+    os.system(f"sudo nmap -sS -p- -Pn -vvv --script default,vuln -sV -oA nmap/tcp {ip}")
+    print("Do you also want to do UDP scanning? Y/N")
+    response = input("Do you also want to do UDP scanning (top 1024)? Y/N  ").lower()
+    if response == "y":
+        os.system(f"sudo nmap -sU -vvv --top-ports=1024 -oA nmap/udp --script default,vuln -Pn {ip}"  )
 print(f"Running scripted nmap on {ip}")
 
 print(str(len(sys.argv)))
