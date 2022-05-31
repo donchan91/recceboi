@@ -26,12 +26,23 @@ print(
 |   \     |      |      |       |       
 |    \     ----   ----   ----    ----    
 
+By donchan91
+
+
+Because no-one ever spells reconesance properly
+
+*reconasonce
+
+**reconnesunce
+
+GitHub: https://github.com/donchan91/recceboi
+
+
+=================================================================
+
 """
 
 )
-print("Because no-one ever spells reconesance properly" )
-print(strike("test"))
-print("=================================================================")
 
 if len(sys.argv) < 2:
     print(f"Usage: {sys.argv[0]} <IP> ")
@@ -45,10 +56,13 @@ start = True
 
 def nmap(ip):
     global start
+    print("Creating the scans directory")
     os.system("mkdir scans")
+    print("Creating the nmap folder inside scans")
     os.system("mkdir scans/nmap")
+    print(f"Creating a folder for {ip}")
     os.system(f"mkdir scans/nmap/{ip}")
-    print(f"Running NMAP stealth scan on {ip} ")
+    print(f"Running NMAP SYN stealth scan on {ip} ")
     os.system(f"sudo nmap -sS -p- -Pn -vvv --script default,vuln -sV -oA scans/nmap/{ip}/tcp {ip}")
     print(f"Creating a textfile with a list of open TCP Ports")
     os.system(f"cat scans/nmap/{ip}/tcp.nmap | grep tcp | grep open | cut -f 1 -d '/' >> scans/opentcpports.txt ")
